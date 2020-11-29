@@ -1,38 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head lang="ja">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>SkyWay JS SDK Tutorial</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<div class="pure-g">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SkyWay - Room example</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">Room example</h1>
+      <p class="note">
+        Change Room mode (before join in a room):
+        <a href="#">mesh</a> / <a href="#sfu">sfu</a>
+      </p>
+      <div class="room">
+        <div>
+          <video id="js-local-stream"></video>
+          <span id="js-room-mode"></span>:
+          <input type="text" placeholder="Room Name" id="js-room-id">
+          <button id="js-join-trigger">Join</button>
+          <button id="js-leave-trigger">Leave</button>
+        </div>
 
-    <!-- Video area -->
-    <div class="pure-u-2-3" id="video-container">
-        <h2>opponent</h2>
-        <video id="their-video" autoplay></video>
-        <h2>You</h2>
-        <video id="my-video" muted="true" autoplay></video>
+        <div class="remote-streams" id="js-remote-streams"></div>
+
+        <div>
+          <pre class="messages" id="js-messages"></pre>
+          <input type="text" id="js-local-text">
+          <button id="js-send-trigger">Send</button>
+        </div>
+      </div>
+      <p class="meta" id="js-meta"></p>
     </div>
-
-    <!-- Steps -->
-    <div class="pure-u-1-3">
-        <h2>SkyWay Video Chat</h2>
-
-        <p>Your id: <span id="my-id">...</span></p>
-        <p>Share this id with others so they can call you.</p>
-        <h3>Make a call</h3>
-        <form id="make-call" class="pure-form">
-            <input type="text" placeholder="Call user id..." id="callto-id">
-            <button href="#" class="pure-button pure-button-success" type="submit">Call</button>
-        </form>
-        <form id="end-call" class="pure-form">
-            <p>Currently in call with <span id="their-id">...</span></p>
-            <button href="#" class="pure-button pure-button-success" type="submit">End Call</button>
-        </form>
-    </div>
-</div>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-<script type="text/javascript" src="script.js"></script>
+    <script src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <!-- <script src="../_shared/key.js"></script> -->
+    <script src="./multi_script.js"></script>
+  </body>
 </html>

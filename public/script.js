@@ -2,6 +2,7 @@
 
 let localStream = null;
 let peer = null;
+let room = null;
 let existingCall = null;
 
 // navigatorはユーザーエージェントの情報を返す https://developer.mozilla.org/ja/docs/Web/API/Navigator
@@ -21,13 +22,22 @@ navigator.mediaDevices.getUserMedia({audio: true})
 });
 
 peer = new Peer({
-    key: '',
+    key: '4093331f-b98d-4ab9-87bd-950c09692a50',
     debug: 3
 });
 
 // 自分自身のIDで映像をVideoにいれる。
+// ブラウザごとにopenイベントが発火される
 peer.on('open', function(){
+    room = peer.joinRoom('test', {
+        mode: 'sfu',
+        stream: localStream,
+    });
     $('#my-id').text(peer.id);
+});
+
+room.on('open', function() {
+    console.log('opened room');
 });
 
 peer.on('error', function(err){
@@ -35,6 +45,7 @@ peer.on('error', function(err){
     alert(err.message);
 });
 
+// ブラウザを閉じたら発火？
 peer.on('close', function(){
     console.log('close');
 });
@@ -43,6 +54,7 @@ peer.on('disconnected', function(){
     console.log('disconnected');
 });
 
+// 電話するボタンを押したら相手のIDを取得する
 $('#make-call').submit(function(e){
     console.log('call pressed');
     e.preventDefault();
@@ -61,10 +73,12 @@ peer.on('call', function(call){
 });
 
 function setupCallEventHandlers(call){
+    // すでに通話がされていれば変更する
     if (existingCall) {
         existingCall.close();
     };
 
+    // 現在の通話として保存する
     existingCall = call;
 
     call.on('stream', function(stream){
