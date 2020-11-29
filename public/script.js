@@ -7,7 +7,7 @@ let existingCall = null;
 // navigatorはユーザーエージェントの情報を返す https://developer.mozilla.org/ja/docs/Web/API/Navigator
 // mediaDevicesは使用可能なメディアデバイスの情報を取得する（読取専用）
 // getUserMediaは要求された種類のメディア{video, audio}でMediaStreamを生成する許可をユーザーに求める
-navigator.mediaDevices.getUserMedia({video: false, audio: true})
+navigator.mediaDevices.getUserMedia({audio: true})
     .then(function (stream) {
         // Success
         console.log($('#my-video').get(0).srcObject);
@@ -21,7 +21,7 @@ navigator.mediaDevices.getUserMedia({video: false, audio: true})
 });
 
 peer = new Peer({
-    key: '<API KEY>',
+    key: '4093331f-b98d-4ab9-87bd-950c09692a50',
     debug: 3
 });
 
